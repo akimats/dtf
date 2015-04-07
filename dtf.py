@@ -49,6 +49,7 @@ def run(mode):
                     os.remove(filename)
             else:
                 if os.path.isdir(filename):
+                    print 'scanning: %s' % filename
                     scanning(filename, patterns)
 
     if mode == 'show' or mode == 'list':
@@ -66,6 +67,7 @@ def run(mode):
     except Exception, e:
         # config nothing. use default_pattern.
         pass
+    print 'scanning: %s' % dirname
     scanning(dirname, patterns)
     return
 
