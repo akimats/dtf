@@ -41,12 +41,24 @@ def run(mode):
                 if os.path.isdir(filename):
                     for root, dirs, files in os.walk(filename, topdown=False):
                         for name in files:
-                            os.remove(os.path.join(root, name))
+							try:
+							    os.remove(os.path.join(root, name))
+							except OSError:
+							    pass
                         for name in dirs:
-                            os.rmdir(os.path.join(root, name))
-                    os.rmdir(filename)
+                            try:
+                                os.rmdir(os.path.join(root, name))
+                            except OSError:
+                                pass
+                    try:
+                        os.rmdir(filename)
+                    except OSError:
+                        pass
                 else:
-                    os.remove(filename)
+                    try:
+                        os.remove(filename)
+                    except OSError:
+                        pass
             else:
                 if os.path.isdir(filename):
                     print 'scanning: %s' % filename
